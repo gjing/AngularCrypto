@@ -10,13 +10,13 @@ import { LineComponent } from '../line/line.component';
   styleUrl: './cryptochart.component.css'
 })
 export class CryptochartComponent {
-  data: any = {"data": []};
+  bitcoin_data: any = {"data": []};
 
   constructor(private cryptoApiService: CryptoApiService) {};
 
   ngOnInit() {
-    this.cryptoApiService.get_test().subscribe((data: Object) => {
-      this.data = data;
+    this.cryptoApiService.get_bitcoin().subscribe((data: Object) => {
+      this.bitcoin_data = data;
     });
   }
 }

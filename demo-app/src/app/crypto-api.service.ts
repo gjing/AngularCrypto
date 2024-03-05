@@ -6,8 +6,8 @@ import { HttpClient } from  '@angular/common/http';
 })
 export class CryptoApiService {
   constructor(private http: HttpClient) { }
-  get_test() {
-    let test_url = "https://api.coincap.io/v2/assets/bitcoin/history?interval=d1";
-    return this.http.get(test_url);
+  get_bitcoin() {
+    let bitcoin_url = "https://api.coincap.io/v2/assets/bitcoin/history?interval=d1";
+    return this.http.get(bitcoin_url);
   }
 }
