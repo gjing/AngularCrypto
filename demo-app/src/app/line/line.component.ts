@@ -45,11 +45,18 @@ export class LineComponent {
   }
 
   private addXandYAxis() {
-    if (this.data) {
+    if (this.data && 'data' in this.data) {
+      let pdata: any = this.data["data"];
+      let dates: Array<Date> = [];
+      let prices: Array<Number> = [];
+      pdata.forEach((d: any) => dates.push(new Date(d.date)));
+      pdata.forEach((d: any) => prices.push(d.priceUsd));
       this.x = d3Scale.scaleTime().range([0, this.width]);
       this.y = d3Scale.scaleLinear().range([this.height, 0]);
-      this.x.domain(d3Array.extent(this.data, (d) => new Date(d.date) ));
-      this.y.domain(d3Array.extent(this.data, (d) => d.priceUsd ));
+      // this.x.domain(d3Array.extent(pdata, (d: any) => new Date(d.time) ));
+      // this.y.domain(d3Array.extent(pdata, (d: any) => d.priceUsd ));
+      this.x.domain(d3Array.extent(dates));
+      this.y.domain(d3Array.extent(prices));
 
      this.svg.append('g')
          .attr('transform', 'translate(0,' + this.height + ')')
@@ -62,12 +69,16 @@ export class LineComponent {
   }
 
   private drawLineAndPath() {
-    this.line = d3Shape.line()
-      .x( (d: any) => this.x(new Date(d.date)) )
-      .y( (d: any) => this.y(d.value) );
-    this.svg.append('path')
-      .datum(this.data)
-      .attr('class', 'line')
-      .attr('d', this.line);
+    if (this.data && 'data' in this.data) {
+      console.log(this.data.data);
+      this.line = d3Shape.line()
+        .x( (d: any) => this.x(new Date(d.date)) )
+        .y( (d: any) => this.y(d.priceUsd) );
+
+      this.svg.append('path')
+        .datum(this.data.data)
+        .attr('class', 'line')
+        .attr('d', this.line);
+    }
   }
 }

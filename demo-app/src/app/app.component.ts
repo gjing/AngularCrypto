@@ -10,5 +10,5 @@ import { CryptochartComponent } from './cryptochart/cryptochart.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'demo-app';
+  title = 'Crypto Values';
 }
