@@ -1,9 +1,13 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
+  "cli": {
+    "packageManager": "npm",
+    "analytics": false
+  },
   "newProjectRoot": "projects",
   "projects": {
-    "demo-app": {
+    "angular-crypto": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/demo-app",
+            "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -22,7 +26,8 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/_routes.json"
             ],
             "styles": [
               "src/styles.css"
@@ -62,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "demo-app:build:production"
+              "buildTarget": "angular-crypto:build:production"
             },
             "development": {
-              "buildTarget": "demo-app:build:development"
+              "buildTarget": "angular-crypto:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "demo-app:build"
+            "buildTarget": "angular-crypto:build"
           }
         },
         "test": {
@@ -96,8 +101,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }
